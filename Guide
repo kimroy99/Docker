@@ -1,0 +1,57 @@
+How To Install Docker On Ubuntu:
+
+1. Add Docker's GPG key and repository.
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+2. Update your package lists.
+
+sudo apt-get update
+
+3. Install Docker Engine, CLI, and other components.
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+
+4. Verify the installation by running the `hello-world` image.
+
+sudo docker run hello-world
+
+How To Uninstall Docker On Ubuntu:
+
+1. Uninstall Docker Packages:
+
+ Open a terminal window
+- sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin docker-ce-rootless-extras
+
+2. Delete Docker Data (Optional):
+
+By default, the purge command doesn't remove Docker data like images, containers, volumes, and configurations. If you want a clean slate, you can delete them manually:
+
+ Images:
+  - sudo rm -rf /var/lib/docker/overlay2
+ Containers, volumes, and configs:
+  - sudo rm -rf /var/lib/docker
+  - sudo rm -rf /var/lib/containerd
+
+
+Important Note: These commands permanently delete data. Use them with caution and only if you're sure you don't need any existing Docker elements.
+
+3. Verify Removal (Optional): Check if Docker is still running:
+  - sudo systemctl status docker
+
+
+
+
